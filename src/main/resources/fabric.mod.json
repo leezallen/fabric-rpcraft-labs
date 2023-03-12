@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "rpcraft-lab",
+  "version": "1.0.0",
+
+  "name": "RPCraft Lab",
+  "description": "Used and an initial development area for items and blocks used in the RPCraft Lab series",
+  "authors": [
+    "LeeZAllen"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "rpcraft.lab.LabMain"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "fabric-api": "*",
+    "minecraft": "~1.19.2",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
