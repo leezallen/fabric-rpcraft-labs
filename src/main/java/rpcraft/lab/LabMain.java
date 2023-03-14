@@ -15,9 +15,7 @@ public class LabMain implements ModInitializer {
 	public void onInitialize() {
 
 		LOGGER.info("RPCraft Lab Initializing... It will (probably) be OK!");
-		RegisterBlocks.RegisterAllBlocks();
+		RegisterLabEquipment.RegisterAllBlocks();
 		
-		// Registry.register(Registry.BLOCK, new Identifier("lab", "hazard_block"), HAZARD_BLOCK);
-		// Registry.register(Registry.ITEM, new Identifier("lab", "hazard_block"), new BlockItem(HAZARD_BLOCK, new FabricItemSettings()));
 	}
 }
