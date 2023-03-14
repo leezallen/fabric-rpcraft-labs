@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable_with_bottom",
+  "textures": {
+    "front": "rpcraftlab:block/battery/side",
+    "bottom": "rpcraftlab:block/battery/bottom",
+    "top": "rpcraftlab:block/battery/top",
+    "side": "rpcraftlab:block/battery/side"
+  }
+}
