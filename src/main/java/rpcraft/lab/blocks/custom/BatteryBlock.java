@@ -1,4 +1,4 @@
-package rpcraft.lab.blocks;
+package rpcraft.lab.blocks.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

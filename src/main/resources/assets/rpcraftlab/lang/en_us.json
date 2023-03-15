@@ -1,6 +1,7 @@
 {
   "itemGroup.rpcraftlab.rpcelectrical": "RPC Electrical",
   "itemGroup.rpcraftlab.rpcdecorative": "RPC Decorative",
+  "itemGroup.rpcraftlab.rpclab": "RPC Lab",
   "block.rpcraftlab.battery": "\"Quality\" Battery",
   "block.rpcraftlab.hazard": "Hazard Block"
 }

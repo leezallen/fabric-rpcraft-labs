@@ -1,7 +1,8 @@
 package rpcraft.lab;
 
 import net.fabricmc.api.ModInitializer;
-
+import rpcraft.lab.blocks.ModBlocks;
+import rpcraft.lab.items.ModItems;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,8 @@ public class LabMain implements ModInitializer {
 	public void onInitialize() {
 
 		LOGGER.info("RPCraft Lab Initializing... It will (probably) be OK!");
-		RegisterLabEquipment.RegisterAllBlocks();
+		ModBlocks.RegisterModBlocks();
+		ModItems.RegisterModItems();
 		
 	}
 }
