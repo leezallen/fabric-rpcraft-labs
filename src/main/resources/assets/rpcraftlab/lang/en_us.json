@@ -1,7 +1,11 @@
 {
-  "itemGroup.rpcraftlab.rpcelectrical": "RPC Electrical",
-  "itemGroup.rpcraftlab.rpcdecorative": "RPC Decorative",
-  "itemGroup.rpcraftlab.rpclab": "RPC Lab",
+  "itemGroup.rpcraftlab.rpclab": "RPC Lab Equipment",
   "block.rpcraftlab.battery": "\"Quality\" Battery",
-  "block.rpcraftlab.hazard": "Hazard Block"
+  "block.rpcraftlab.hazard": "Hazard Block",
+  "block.rpcraftlab.deepslateuraniumore": "Deepslate Uranium Ore",
+  "block.rpcraftlab.netherlithiumore": "Nether Lithium Ore",
+  "item.rpcraftlab.lithiumore": "Raw Lithium",
+  "item.rpcraftlab.lithiumingot": "Lithium Ingot",
+  "item.rpcraftlab.uraniumore": "Raw Uranium",
+  "item.rpcraftlab.uraniumingot": "Uranium Ingot"
 }

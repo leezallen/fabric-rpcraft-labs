@@ -14,6 +14,10 @@ public class ModItems {
 
 	// Define item details
 	public static final Item EYEPAD = AddLabItem("eyepad", ModItemGroups.RPCLAB, 1);
+	public static final Item URANIUM_ORE = AddLabItem("uraniumore", ModItemGroups.RPCLAB, 16);
+	public static final Item URANIUM_INGOT = AddLabItem("uraniumingot", ModItemGroups.RPCLAB, 16);
+	public static final Item LITHIUM_ORE = AddLabItem("lithiumore", ModItemGroups.RPCLAB, 64);
+	public static final Item LITHIUM_INGOT = AddLabItem("lithiumingot", ModItemGroups.RPCLAB, 64);
 	
 	public static Item AddLabItem(String name, ItemGroup tab, int maxCount) {
 		LabMain.LOGGER.info("Registering item: " + name);
