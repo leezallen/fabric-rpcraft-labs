@@ -2,10 +2,11 @@
   "itemGroup.rpcraftlab.rpclab": "RPC Lab Equipment",
   "block.rpcraftlab.battery": "\"Quality\" Battery",
   "block.rpcraftlab.hazard": "Hazard Block",
-  "block.rpcraftlab.deepslateuraniumore": "Deepslate Uranium Ore",
-  "block.rpcraftlab.netherlithiumore": "Nether Lithium Ore",
-  "item.rpcraftlab.lithiumore": "Raw Lithium",
-  "item.rpcraftlab.lithiumingot": "Lithium Ingot",
-  "item.rpcraftlab.uraniumore": "Raw Uranium",
-  "item.rpcraftlab.uraniumingot": "Uranium Ingot"
+  "block.rpcraftlab.deepslate_uranium_ore": "Deepslate Uranium Ore",
+  "block.rpcraftlab.nether_lithium_ore": "Nether Lithium Ore",
+  "item.rpcraftlab.eyepad": "Top Notch Tablet",
+  "item.rpcraftlab.lithium_raw": "Raw Lithium",
+  "item.rpcraftlab.lithium_ingot": "Lithium Ingot",
+  "item.rpcraftlab.uranium_raw": "Raw Uranium",
+  "item.rpcraftlab.uranium_ingot": "Uranium Ingot"
 }

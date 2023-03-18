@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 125,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "rpcraftlab:lithium_raw"
+  },
+  "result": "rpcraftlab:lithium_ingot"
+}

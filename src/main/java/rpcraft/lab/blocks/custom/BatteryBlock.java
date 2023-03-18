@@ -40,7 +40,7 @@ public class BatteryBlock extends Block {
         {
             if (world.isReceivingRedstonePower(pos))
             {
-            	if (!world.getBlockState(pos).get(ON) && !world.isClient) { 
+            	if (!world.getBlockState(pos).get(ON)) {
             		world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS, 1f, 1f);
             	}
             	world.setBlockState(pos, state.with(ON, true));

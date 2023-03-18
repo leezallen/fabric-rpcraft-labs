@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "rpcraftlab:item/lithiumingot"
+		"layer0": "rpcraftlab:item/lithium_raw"
 	}
 }

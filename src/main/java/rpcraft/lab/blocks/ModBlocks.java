@@ -24,15 +24,19 @@ public class ModBlocks {
 	public static final Block HAZARD = RegisterLabBlock(new Block(FabricBlockSettings.of(Material.METAL).strength(1f, 1f)) ,
 			"hazard" ,ModItemGroups.RPCLAB);
 			
-	public static final BatteryBlock BATTERY = (BatteryBlock) RegisterLabBlock(new BatteryBlock(FabricBlockSettings.of(Material.METAL).strength(3f, 3f)), 
+	public static final Block BATTERY =  RegisterLabBlock(new BatteryBlock(FabricBlockSettings.of(Material.METAL).strength(3f, 3f)),
 			"battery", ModItemGroups.RPCLAB, 16);
 	
 	public static final Block DEEPSLATE_URANIUM_ORE = RegisterLabBlock(new OreBlock(FabricBlockSettings.of(Material.METAL).strength(3f, 3f).requiresTool(), UniformIntProvider.create(3, 7)),
-			"deepslateuraniumore",  ModItemGroups.RPCLAB);
+			"deepslate_uranium_ore",  ModItemGroups.RPCLAB);
 	
 	public static final Block NETHER_LITHIUM_ORE = RegisterLabBlock(new OreBlock(FabricBlockSettings.of(Material.METAL).strength(3f, 3f).requiresTool(), UniformIntProvider.create(3, 7)),
-			"netherlithiumore",  ModItemGroups.RPCLAB);
-	
+			"nether_lithium_ore",  ModItemGroups.RPCLAB);
+
+	private static Block RegisterLabBlock (Block block, String name, ItemGroup tab)
+	{
+		return RegisterLabBlock(block,name,tab,64);
+	}
 	
 	private static Block RegisterLabBlock (Block block, String name, ItemGroup tab, int maxCount)
 	{
@@ -43,13 +47,7 @@ public class ModBlocks {
 		
 	}
 	
-	private static Block RegisterLabBlock (Block block, String name, ItemGroup tab)
-	{
-		return RegisterLabBlock(block,name,tab,64);
-	}
-	
-	
-	private static Item RegisterBlockItem(Block block, String name, ItemGroup tab, int maxCount) 
+	private static Item RegisterBlockItem(Block block, String name, ItemGroup tab, int maxCount)
 	{
 		return Registry.register(Registry.ITEM, new Identifier(MODID, name), new BlockItem(block, new FabricItemSettings().group(tab).maxCount(maxCount)));
 	}

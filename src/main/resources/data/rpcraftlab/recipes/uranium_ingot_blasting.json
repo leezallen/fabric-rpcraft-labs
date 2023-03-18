@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 500,
+  "experience": 0.8,
+  "ingredient": {
+    "item": "rpcraftlab:uranium_raw"
+  },
+  "result": "rpcraftlab:uranium_ingot"
+}

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "rpcraftlab:item/uraniumraw"
+		"layer0": "rpcraftlab:item/uranium_raw"
 	}
 }

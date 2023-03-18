@@ -1,16 +1,19 @@
 {
 	"type":"minecraft:crafting_shaped",
 	"pattern": [
-		"#c#",
-		"#c#",
-		"#c#"
+		"ccc",
+		"i#i",
+		"i#i"
 	],
 	"key": {
 		"#": {
-			"item": "rpcraftlab:lithiumingot"
+			"item": "rpcraftlab:lithium_ingot"
 		},
 		"c": {
 			"item": "minecraft:copper_ingot"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
 		}
 	},
 	"result": {
