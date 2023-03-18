@@ -47,9 +47,9 @@ public class ModBlocks {
 		
 	}
 	
-	private static Item RegisterBlockItem(Block block, String name, ItemGroup tab, int maxCount)
+	private static void RegisterBlockItem(Block block, String name, ItemGroup tab, int maxCount)
 	{
-		return Registry.register(Registry.ITEM, new Identifier(MODID, name), new BlockItem(block, new FabricItemSettings().group(tab).maxCount(maxCount)));
+		Registry.register(Registry.ITEM, new Identifier(MODID, name), new BlockItem(block, new FabricItemSettings().group(tab).maxCount(maxCount)));
 	}
 	public static void RegisterModBlocks()
 	{
