@@ -1,6 +1,8 @@
 package rpcraft.lab.items.custom;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -16,48 +18,35 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import rpcraft.lab.datatypes.eNUMTabletMode;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class EyePadItem extends Item {
 
-    public enum Mode {
-        TELEPORT("teleport"),
-        NOTHING("nothing"),
-        SLEEP("sleepmode"),
-        EAT("eatmode");
-
-        private final String name;
-        Mode(String name) {
-            this.name = name;
-        }
-
-        // Get the next mode in the list, cycling back to the beginning when reaching the end
-        public Mode next() {
-            Mode[] modes = Mode.values();
-            return modes[(this.ordinal() + 1) % modes.length];
-        }
-    }
+    public static eNUMTabletMode TABLET_MODE;
     private static final String MODE_TAG = "currentMode";
     public EyePadItem(Settings settings) {
         super(settings);
     }
 
     // Get the current mode of the item from its NBT tag
-    public static Mode getCurrentMode(ItemStack itemStack) {
+    public static eNUMTabletMode getCurrentMode(ItemStack itemStack) {
         NbtCompound tag = itemStack.getOrCreateNbt();
         if (tag.contains(MODE_TAG)) {
-            return Mode.valueOf(tag.getString(MODE_TAG));
+            return eNUMTabletMode.valueOf(tag.getString(MODE_TAG));
         } else {
-            return Mode.SLEEP;
+            return eNUMTabletMode.SLEEP;
         }
     }
     // Set the current mode of the item in its NBT tag
-    public static Mode setNextMode(ItemStack itemStack) {
+    public static eNUMTabletMode setNextMode(ItemStack itemStack) {
         NbtCompound tag = itemStack.getOrCreateNbt();
-        Mode mode = getCurrentMode(itemStack).next();
+        eNUMTabletMode mode = getCurrentMode(itemStack).getNextMode();
         tag.putString(MODE_TAG, mode.name());
         itemStack.setNbt(tag);
         return mode;
@@ -69,11 +58,22 @@ public class EyePadItem extends Item {
     }
 
     @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        if (Screen.hasShiftDown()) {
+            tooltip.add(Text.literal("Check controls for the key to change modes").formatted(Formatting.LIGHT_PURPLE));
+        } else {
+            tooltip.add(Text.literal("Current Mode: " + getCurrentMode(stack).name()).formatted(Formatting.LIGHT_PURPLE));
+        }
+
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
         ItemStack itemStack = user.getStackInHand(hand);
         if(!world.isClient) {
-            Mode mode = getCurrentMode(itemStack);
+            eNUMTabletMode mode = getCurrentMode(itemStack);
             switch (mode) {
                 case TELEPORT:
                     tabletModeTeleport(world, user, hand);
@@ -100,6 +100,7 @@ public class EyePadItem extends Item {
                 tag.putDouble("x", user.getX());
                 tag.putDouble("y", user.getY());
                 tag.putDouble("z", user.getZ());
+                tag.putString("dim", world.getRegistryKey().getValue().toString());
 
                 user.sendMessage(Text.literal("Teleport destination is set.").formatted(Formatting.LIGHT_PURPLE),true);
                 // add a cooldown
@@ -110,12 +111,17 @@ public class EyePadItem extends Item {
                 double x = tag.getDouble("x");
                 double y = tag.getDouble("y");
                 double z = tag.getDouble("z");
-                ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-                CountdownTeleport countdownTeleport = new CountdownTeleport(user, x, y, z, scheduler);
-                //final int delay = 3;
-                final int interval = 1;
-                scheduler.scheduleAtFixedRate(countdownTeleport, interval, interval, TimeUnit.SECONDS);
-                user.getItemCooldownManager().set(this, 80);
+                String dim = tag.getString("dim");
+                if (dim.equals(world.getRegistryKey().getValue().toString())) {
+                    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+                    CountdownTeleport countdownTeleport = new CountdownTeleport(user, x, y, z, scheduler);
+                    //final int delay = 3;
+                    final int interval = 1;
+                    scheduler.scheduleAtFixedRate(countdownTeleport, interval, interval, TimeUnit.SECONDS);
+                    user.getItemCooldownManager().set(this, 80);
+                } else {
+                    user.sendMessage(Text.literal("Teleporting does not work between dimensions. Your point is in " + dim).formatted(Formatting.GOLD),true);
+                }
             } else {
                 user.sendMessage(Text.literal("Sneak and right click to save this position").formatted(Formatting.LIGHT_PURPLE),true);
                 user.getItemCooldownManager().set(this, 20);
