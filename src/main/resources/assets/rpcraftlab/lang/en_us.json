@@ -8,5 +8,8 @@
   "item.rpcraftlab.lithium_raw": "Raw Lithium",
   "item.rpcraftlab.lithium_ingot": "Lithium Ingot",
   "item.rpcraftlab.uranium_raw": "Raw Uranium",
-  "item.rpcraftlab.uranium_ingot": "Uranium Ingot"
+  "item.rpcraftlab.uranium_ingot": "Uranium Ingot",
+  "message.rpcraftlab.eyepad.changedmode": "Eyepad mode changed to %s",
+  "key.rpcraftlab.eyepad.changemode": "Cycle EyePad mode",
+  "key.category.rpcraftlab": "RPCRAFT Labs"
 }

@@ -6,6 +6,7 @@ import rpcraft.lab.items.ModItems;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rpcraft.lab.networking.ModMessagePackets;
 
 public class LabMain implements ModInitializer {
 
@@ -18,6 +19,6 @@ public class LabMain implements ModInitializer {
 		LOGGER.info("RPCraft Lab Initializing... It will (probably) be OK!");
 		ModBlocks.RegisterModBlocks();
 		ModItems.RegisterModItems();
-		
+		ModMessagePackets.registerC2SPackets();
 	}
 }

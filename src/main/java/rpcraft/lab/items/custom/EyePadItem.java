@@ -23,12 +23,45 @@ import java.util.concurrent.TimeUnit;
 
 public class EyePadItem extends Item {
 
-    private static final String POSITION_TAG = "teleportDest";
+    public enum Mode {
+        TELEPORT("teleport"),
+        NOTHING("nothing"),
+        SLEEP("sleepmode"),
+        EAT("eatmode");
 
+        private final String name;
+        Mode(String name) {
+            this.name = name;
+        }
+
+        // Get the next mode in the list, cycling back to the beginning when reaching the end
+        public Mode next() {
+            Mode[] modes = Mode.values();
+            return modes[(this.ordinal() + 1) % modes.length];
+        }
+    }
+    private static final String MODE_TAG = "currentMode";
     public EyePadItem(Settings settings) {
         super(settings);
     }
 
+    // Get the current mode of the item from its NBT tag
+    public static Mode getCurrentMode(ItemStack itemStack) {
+        NbtCompound tag = itemStack.getOrCreateNbt();
+        if (tag.contains(MODE_TAG)) {
+            return Mode.valueOf(tag.getString(MODE_TAG));
+        } else {
+            return Mode.SLEEP;
+        }
+    }
+    // Set the current mode of the item in its NBT tag
+    public static Mode setNextMode(ItemStack itemStack) {
+        NbtCompound tag = itemStack.getOrCreateNbt();
+        Mode mode = getCurrentMode(itemStack).next();
+        tag.putString(MODE_TAG, mode.name());
+        itemStack.setNbt(tag);
+        return mode;
+    }
     @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         // Stops block destruction but does not seem to cancel the actual mining.
@@ -38,9 +71,20 @@ public class EyePadItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
-        // We only have one mode at the moment!
-        tabletModeTeleport(world, user, hand);
+        ItemStack itemStack = user.getStackInHand(hand);
+        if(!world.isClient) {
+            Mode mode = getCurrentMode(itemStack);
+            switch (mode) {
+                case TELEPORT:
+                    tabletModeTeleport(world, user, hand);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         return super.use(world, user, hand);
+
     }
 
     private void tabletModeTeleport (World world, PlayerEntity user, Hand hand) {
@@ -57,8 +101,7 @@ public class EyePadItem extends Item {
                 tag.putDouble("y", user.getY());
                 tag.putDouble("z", user.getZ());
 
-                user.sendMessage(Text.literal("Player " + user.getEntityName()).formatted(Formatting.GOLD));
-                user.sendMessage(Text.literal("Teleport destination is set.").formatted(Formatting.LIGHT_PURPLE));
+                user.sendMessage(Text.literal("Teleport destination is set.").formatted(Formatting.LIGHT_PURPLE),true);
                 // add a cooldown
                 user.getItemCooldownManager().set(this, 20);
             }
@@ -69,17 +112,16 @@ public class EyePadItem extends Item {
                 double z = tag.getDouble("z");
                 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
                 CountdownTeleport countdownTeleport = new CountdownTeleport(user, x, y, z, scheduler);
-                final int delay = 3;
+                //final int delay = 3;
                 final int interval = 1;
                 scheduler.scheduleAtFixedRate(countdownTeleport, interval, interval, TimeUnit.SECONDS);
                 user.getItemCooldownManager().set(this, 80);
             } else {
-                user.sendMessage(Text.literal("Sneak and right click to save this position").formatted(Formatting.LIGHT_PURPLE));
+                user.sendMessage(Text.literal("Sneak and right click to save this position").formatted(Formatting.LIGHT_PURPLE),true);
                 user.getItemCooldownManager().set(this, 20);
             }
 
         }
-
     }
 
     private static void playerTeleportEffect (PlayerEntity player, ServerWorld world) {
@@ -135,7 +177,7 @@ public class EyePadItem extends Item {
                 world.spawnParticles(ParticleTypes.PORTAL, player.getX() + offsetX, player.getY() + offsetY, player.getZ() + offsetZ, 20 * (4-remainingTime), 0.5, 0.5, 0.5, 1);
             }
 
-            player.sendMessage(Text.literal("Teleporting in " + remainingTime + " seconds...").formatted(Formatting.LIGHT_PURPLE));
+            player.sendMessage(Text.literal("Teleporting in " + remainingTime + " seconds...").formatted(Formatting.LIGHT_PURPLE),true);
             remainingTime--;
         }
 

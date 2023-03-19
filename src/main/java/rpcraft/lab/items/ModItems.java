@@ -13,7 +13,7 @@ import static rpcraft.lab.LabMain.MODID;
 public class ModItems {
 
 	// Define item details
-	public static final Item EYEPAD = RegisterItem("eyepad", new EyePadItem(new FabricItemSettings().group(ModItemGroups.RPCLAB).maxCount(1)));
+	public static final EyePadItem EYEPAD = (EyePadItem) RegisterItem("eyepad", new EyePadItem(new FabricItemSettings().group(ModItemGroups.RPCLAB).maxCount(1)));
 	public static final Item URANIUM_RAW = RegisterItem("uranium_raw", new Item(new FabricItemSettings().group(ModItemGroups.RPCLAB).maxCount(16)));
 	public static final Item URANIUM_INGOT = RegisterItem("uranium_ingot", new Item(new FabricItemSettings().group(ModItemGroups.RPCLAB).maxCount(16)));
 	public static final Item LITHIUM_RAW = RegisterItem("lithium_raw", new Item(new FabricItemSettings().group(ModItemGroups.RPCLAB)));

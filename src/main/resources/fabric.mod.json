@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "rpcraft.lab.LabMain"
+    ],
+    "client" : [
+      "rpcraft.lab.LabMainClient"
     ]
   },
   "mixins": [
