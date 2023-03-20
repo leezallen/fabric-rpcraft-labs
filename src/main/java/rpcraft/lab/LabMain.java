@@ -27,5 +27,6 @@ public class LabMain implements ModInitializer {
 		ModMessagePackets.registerC2SPackets();
 
 		ModOreGeneration.generateOres();
+		LOGGER.info("RPCraft Lab Initialized...");
 	}
 }
