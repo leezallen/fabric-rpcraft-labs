@@ -23,6 +23,9 @@
     ],
     "client" : [
       "rpcraft.lab.LabMainClient"
+    ],
+    "fabric-datagen" : [
+      "rpcraft.lab.datagen.ModDataGeneration"
     ]
   },
   "mixins": [
