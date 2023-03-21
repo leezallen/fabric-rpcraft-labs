@@ -8,6 +8,6 @@ public class ModDataGeneration implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         LabMain.LOGGER.debug("Initializing Fabric Data Generation");
-
+        fabricDataGenerator.addProvider(ModFabricLootTableProvider::new);
     }
 }

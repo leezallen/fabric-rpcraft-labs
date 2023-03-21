@@ -45,7 +45,7 @@ def dataOutput = 'src/main/generated'
 
 loom {
 	runs {
-		datagen{
+		datagen {
 			server()
 
 			name "Data Generation"
